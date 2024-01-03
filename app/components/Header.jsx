@@ -4,7 +4,7 @@ import Link from "next/link";
 function Header() {
   return (
     <div className="my-[50px] mx-0 text-center">
-      <h1 className="text-[#304ffe] text-4xl mb-[20px]">Contact App</h1>
+      <h1 className="text-[#304ffe] text-4xl mb-[20px] font-semibold">Contact App</h1>
       <p className="text-gray-500">
         <Link
           href="https://botostart.ir "

@@ -1,11 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import ContactsList from "./ContactsList.1";
+import { v4 } from "uuid";
+
+const inputs = [
+  { type: "text", name: "name", placeholder: "Name" },
+  { type: "text", name: "lastName", placeholder: "Last Name" },
+  { type: "email", name: "email", placeholder: "Email" },
+  { type: "number", name: "phone", placeholder: "Phone" },
+];
 
 function Contacts() {
   const [alert, setAlert] = useState("");
   const [contacts, setContacts] = useState([]);
   const [contact, setContact] = useState({
+    id: "",
     name: "",
     lastName: "",
     email: "",
@@ -30,7 +39,8 @@ function Contacts() {
       return;
     }
     setAlert("");
-    setContacts((contacts) => [...contacts, contact]);
+    const newContact = { ...contact, id: v4() };
+    setContacts((contacts) => [...contacts, newContact]);
     setContact({
       name: "",
       lastName: "",
@@ -41,38 +51,18 @@ function Contacts() {
   return (
     <div>
       <div>
-        <input
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={contact.name}
-          onChange={changeHandler}
-          className="border"
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          name="lastName"
-          value={contact.lastName}
-          onChange={changeHandler}
-          className="border"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={contact.email}
-          onChange={changeHandler}
-          className="border"
-        />
-        <input
-          type="number"
-          placeholder="Phone"
-          name="phone"
-          value={contact.phone}
-          onChange={changeHandler}
-          className="border"
-        />
+        {inputs.map((input, index) => (
+          <input
+            key={index}
+            type={input.type}
+            placeholder={input.placeholder}
+            name={input.name}
+            value={contact[input.name]}
+            onChange={changeHandler}
+            className="border"
+          />
+        ))}
+
         <button onClick={addHandler} className="border">
           Add Contact
         </button>
