@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { AiFillHeart } from 'react-icons/ai'
 
-const BookCard = ({data:{title,author,image,language,pages}}) => {
+const BookCard = ({data,handleLikedList}) => {
+    const {title,author,image,language,pages}=data
+
     const [like,setLike] =useState(false)
 
     const likeHandler=()=>{
-        setLike((like)=>!like)
+        handleLikedList(data,like)
+        setLike((like)=>!like)//in yek amal async ast va bad az balayee bayad benevisim
     }
   return (
     <div className='flex p-2.5 mb-2.5 bg-[#303030] rounded-lg'>
